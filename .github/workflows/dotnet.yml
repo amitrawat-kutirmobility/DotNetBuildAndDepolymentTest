@@ -19,19 +19,24 @@ jobs:
         
     steps:
     - uses: actions/checkout@v3
+
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 6.0.x
+
     - name: Restore dependencies
       run: dotnet restore
+
     - name: Build
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet build --configuration Release
+
     - name: Publish
-      run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}\myapp
+      run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/asp_publish
+
     - name: 'Upload Artifact'
       uses: actions/upload-artifact@v3
       with:
         name: upload artifact
-        path: ${{env.DOTNET_ROOT}}\myapp
+        path: ${{env.DOTNET_ROOT}}/asp_publish
    
