@@ -13,9 +13,9 @@ jobs:
   build:
 
     runs-on: windows-latest
-    defaults:
-      run:
-        working-directory: ./src/TodoApi
+    # defaults:
+    #   run:
+    #     working-directory: ./src/TodoApi
         
     steps:
     - uses: actions/checkout@v3
@@ -26,15 +26,19 @@ jobs:
         dotnet-version: 6.0.x
 
     - name: Restore dependencies
+      working-directory: ./src/TodoApi
       run: dotnet restore
 
     - name: Build
+      working-directory: ./src/TodoApi
       run: dotnet build --configuration Release
 
     - name: Publish
+      working-directory: ./src/TodoApi
       run: dotnet publish -c Release -o ./asp_publish
 
     - name: 'Upload Artifact'
+      working-directory: ./src/TodoApi
       uses: actions/upload-artifact@v3
       with:
         name: upload artifact
