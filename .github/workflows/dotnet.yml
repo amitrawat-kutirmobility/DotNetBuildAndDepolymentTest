@@ -38,7 +38,6 @@ jobs:
       run: dotnet publish -c Release -o ./asp_publish
 
     - name: 'Upload Artifact'
-      working-directory: ./src/TodoApi
       uses: actions/upload-artifact@v3
       with:
         name: upload artifact
