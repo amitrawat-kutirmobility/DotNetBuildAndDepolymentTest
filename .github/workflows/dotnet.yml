@@ -26,10 +26,12 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build --configuration Release --no-restore
+    - name: Publish
+      run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/build_publish 
     - name: 'Upload Artifact'
       uses: actions/upload-artifact@v3
       with:
-        name: my-artifact
-        path: Build
+        name: Build artifact
+        path: ${{env.DOTNET_ROOT}}/build_publish 
         retention-days: 5
